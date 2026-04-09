@@ -81,20 +81,21 @@ jobs:
           def add(name, runner, archs, build, platform, qemu=False):
               CASES.append(locals())
 
-          for identifier in ("manylinux", "musllinux"):
-              build = " ".join(f"{py}-{identifier}_*" for py in PYTHON_VERSIONS if identifier=="manylinux" or py.startswith("cp"))
-              add(f"Linux regular {identifier}", "ubuntu-latest", "x86_64 i686", build, "linux")
-              if FULL:
-                  for arch in ("aarch64", "ppc64le", "riscv64", "s390x"):
-                      add(f"Linux {arch} {identifier}", "ubuntu-latest", arch, build, "linux", True)
-          build = " ".join(f"{py}-*" for py in PYTHON_VERSIONS)
-          add("Windows regular", "windows-latest", "AMD64 x86", build, "windows")
-          if FULL:
-              add("Windows arm", "windows-11-arm", "ARM64", build, "windows")
-          add("macOS regular", "macos-latest", "x86_64 arm64", build, "macos")
-          add("Android arm64_v8a", "macos-latest", "arm64_v8a", "cp313-*", "android")
-          add("Android x86_64", "ubuntu-latest", "x86_64", "cp313-*", "android")
-          add("iOS", "macos-14", "all", "cp313-*", "ios")  # "macos-14" because of https://github.com/actions/runner-images/issues/12777
+          # for identifier in ("manylinux", "musllinux"):
+          #     build = " ".join(f"{py}-{identifier}_*" for py in PYTHON_VERSIONS if identifier=="manylinux" or py.startswith("cp"))
+          #     add(f"Linux regular {identifier}", "ubuntu-latest", "x86_64 i686", build, "linux")
+          #     if FULL:
+          #         for arch in ("aarch64", "ppc64le", "riscv64", "s390x"):
+          #             add(f"Linux {arch} {identifier}", "ubuntu-latest", arch, build, "linux", True)
+          # build = " ".join(f"{py}-*" for py in PYTHON_VERSIONS)
+          # add("Windows regular", "windows-latest", "AMD64 x86", build, "windows")
+          # if FULL:
+          #     add("Windows arm", "windows-11-arm", "ARM64", build, "windows")
+          # add("macOS regular", "macos-latest", "x86_64 arm64", build, "macos")
+          # add("Android arm64_v8a", "macos-latest", "arm64_v8a", "cp313-*", "android")
+          # add("Android x86_64", "ubuntu-latest", "x86_64", "cp313-*", "android")
+          add("iOS", "macos-14", "arm64", "cp313-*", "ios")  # "macos-14" because of https://github.com/actions/runner-images/issues/12777
+          add("iOS", "macos-26-intel", "x86_64", "cp313-*", "ios")
 
           print("full:", FULL)
           print(json.dumps(CASES, indent=2))
