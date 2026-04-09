@@ -92,7 +92,7 @@ jobs:
           if FULL:
               add("Windows arm", "windows-11-arm", "ARM64", build, "windows")
           add("macOS regular", "macos-latest", "x86_64 arm64", build, "macos")
-          add("Android arm64_v8a", "ubuntu-24.04-arm", "arm64_v8a", "cp313-*", "android")
+          add("Android arm64_v8a", "macos-latest", "arm64_v8a", "cp313-*", "android")
           add("Android x86_64", "ubuntu-latest", "x86_64", "cp313-*", "android")
           add("iOS", "macos-14", "all", "cp313-*", "ios")  # "macos-14" because of https://github.com/actions/runner-images/issues/12777
 
